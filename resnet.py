@@ -236,10 +236,12 @@ class ResnetBuilder(object):
         pool2 = AveragePooling2D(pool_size=(block_shape[ROW_AXIS], block_shape[COL_AXIS]),
                                  strides=(1, 1))(block)
         flatten1 = Flatten()(pool2)
-        dense = Dense(units=num_outputs, kernel_initializer="he_normal",
-                      activation="softmax")(flatten1)
+        # dense = Dense(units=num_outputs, kernel_initializer="he_normal",
+        #               activation="softmax")(flatten1)
+        #取消分类
 
-        model = Model(inputs=input, outputs=dense)
+        # model = Model(inputs=input, outputs=dense)
+        model = Model(inputs=input, outputs=flatten1)
         return model
 
     @staticmethod
